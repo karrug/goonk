@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if not job.completed %}
+    <meta http-equiv="refresh" content="2">
+    {% endif %}
+    <title>Goonk</title>
+    <style type="text/css">
+      body {
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px;
+        overflow-y: scroll;
+      }
+      h1, h2, h3 {
+        line-height: 1.2
+      }
+      a {
+        text-decoration: none;
+      }
+      header {
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="{% url 'set_job' %}" method='post'>
+      {% csrf_token %}
+      <input type="hidden" id="jobid" name="jobid" value="{{ job.job_id }}"><br><br>
+      <label for="code">Code:</label><br>
+      <textarea id="code" name="code">{{ job.code }}</textarea><br><br>
+      {% if job.completed %}
+      <input type="submit" value="Submit">
+      {% else %}
+      <input type="submit" value="Submit" disabled>
+      {% endif %}
+    </form>
+    {% if job.completed %}
+    <label for="result">Result:</label><br>
+    <textarea id="result" name="result">{{ job.result }}</textarea><br><br>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,22 @@
+FROM ubuntu:18.04
+
+
+ARG APPDIR=/root/goonk
+ARG APPNAME=goonk
+
+RUN apt-get update -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip
+# RUN pip3 install setuptools
+
+RUN mkdir ${APPDIR}
+WORKDIR ${APPDIR} 
+ADD . ${APPDIR}
+
+RUN pip3 install --no-cache-dir -r ${APPDIR}/requirements.txt
+
+# remove build pkgs
+# RUN apt-get remove --purge -y build-essential libpcre3-dev libpq-dev python3-pip gcc python3-dev
+
+
+# django env vars
+ENV DJANGO_ENVIRONMENT=live

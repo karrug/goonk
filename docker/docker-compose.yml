@@ -1,0 +1,33 @@
+version: '3'
+services:
+  goonk9320:
+    network_mode: host
+    build:
+      context: ..
+      dockerfile: docker/dockerfile
+      args:
+        UWSGI_HTTP: 9320
+
+  goonk9321:
+    network_mode: host
+    build:
+      context: ..
+      dockerfile: docker/dockerfile
+      args:
+        UWSGI_HTTP: 9321
+
+  goonk9322:
+    network_mode: host
+    build:
+      context: ..
+      dockerfile: docker/dockerfile
+      args:
+        UWSGI_HTTP: 9322
+
+  goonk9323:
+    network_mode: host
+    build:
+      context: ..
+      dockerfile: docker/dockerfile
+      args:
+        UWSGI_HTTP: 9323
