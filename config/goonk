@@ -1,0 +1,28 @@
+upstream goonk {
+  server 127.0.0.1:9320;
+  # server 127.0.0.1:9321;
+  # server 127.0.0.1:9322;
+  # server 127.0.0.1:9323;
+}
+
+server {
+  listen       80;
+  server_name  goonk.karrug.com;
+  return       301 https://$host$request_uri;
+}
+
+server {
+  listen       443 ssl;
+  server_name  goonk.karrug.com;
+  charset     utf-8;
+  client_max_body_size 75M;
+
+  ssl_certificate /etc/letsencrypt/live/goonk.karrug.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/goonk.karrug.com/privkey.pem;
+
+
+  location / {
+    proxy_pass http://goonk;
+  }
+}
+
