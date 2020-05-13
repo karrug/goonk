@@ -2,5 +2,3 @@
 *.swo
 __pycache__
 db.sqlite3
-docker/restart.sh
-docker/docker-compose-dev.yml
